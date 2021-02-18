@@ -29,7 +29,7 @@ jobs:
             # Store secret for dev hub
             - name: 'Populate auth file with DEVHUB_SFDX_URL secret'
               shell: bash
-              run: 'echo ${{ secrets.AUTH_URL}}'
+              run: 'echo ${{ secrets.Test}}'
 
             # Authenticate dev hub
             - name: 'Authenticate Dev Hub'
