@@ -29,7 +29,7 @@ jobs:
             # Store secret for dev hub
             - name: 'Populate auth file with DEVHUB_SFDX_URL secret'
               shell: bash
-              run: 'echo ${{ env.dev_cpq_sfdx_auth_url}} > ./DEVHUB_SFDX_URL.txt'
+              run: 'echo ${{ secrets.AUTH_URL}}'
 
             # Authenticate dev hub
             - name: 'Authenticate Dev Hub'
@@ -44,12 +44,12 @@ jobs:
               run: 'sfdx force:source:push'
 
             # Assign permissionset
-            - name: 'Assign permissionset to default user'
-              run: 'sfdx force:user:permset:assign -n ecars'
+            #- name: 'Assign permissionset to default user'
+             # run: 'sfdx force:user:permset:assign -n ecars'
 
             # Import sample data
-            - name: 'Import sample data'
-              run: 'sfdx force:data:tree:import -p ./data/data-plan.json'
+           # - name: 'Import sample data'
+            #  run: 'sfdx force:data:tree:import -p ./data/data-plan.json'
 
             # Run Apex tests in scratch org
             - name: 'Run Apex tests'
