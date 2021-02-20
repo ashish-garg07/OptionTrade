@@ -11,10 +11,7 @@ on:
           default: 'warning'
         tags:
           description: 'Test scenario tags' 
-        paths-ignore:
-              - 'sfdx-project.json'
-              - 'README.md'
-
+          
 # Jobs to be executed
 jobs:
     create-package:
