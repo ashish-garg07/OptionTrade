@@ -12,24 +12,32 @@ System.debug('My name is ' + tempvar);
 Map<String,List<Map<String,String>>> dataOption = new Map<String,List<Map<String,String>>>();
 
 List<Map<String,String>> callList = new List<Map<String,String>>();
+List<Map<String,String>> puitList = new List<Map<String,String>>();
 Map<String,String> callBuyMap = new Map<String,String>();
-callBuyMap.put('Action','buy');
-callBuyMap.put('Strike','7800');
-callBuyMap.put('pp','79');
+callBuyMap.put('Action','sell');
+callBuyMap.put('Strike','15300');
+callBuyMap.put('pp','45');
 callList.add(callBuyMap);
 
-Map<String,String> callSellMap = new Map<String,String>();
-callSellMap.put('Action','sell');
-callSellMap.put('Strike','7900');
-callSellMap.put('pp','25');
-callList.add(callSellMap);
+// Map<String,String> callSellMap = new Map<String,String>();
+// callSellMap.put('Action','sell');
+// callSellMap.put('Strike','7900');
+// callSellMap.put('pp','25');
+// callList.add(callSellMap);
+
+Map<String,String> putSellMap = new Map<String,String>();
+putSellMap.put('Action','sell');
+putSellMap.put('Strike','14650');
+putSellMap.put('pp','30');
+puitList.add(putSellMap);
 
 dataOption.put('Call',callList);
+dataOption.put('Put',puitList);
 
 
 
-Integer expStart = 7000;
-Integer expEnd = 8500;
+Integer expStart = 14000;
+Integer expEnd = 15800;
 
 for(Integer i = 0;i < (expEnd - expStart);i = i + 100){
     Integer profitLoss = 0;
