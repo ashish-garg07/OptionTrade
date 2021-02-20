@@ -40,7 +40,7 @@ jobs:
             # Create package 
             - name: 'Create Package'
               run: |
-              echo '::set-output name=PACKAGE_NAME:: $(sfdx force:package:create -n option-basic -t Unlocked -r force-app -e)'
+              echo ::set-output name=PACKAGE_NAME:: $(sfdx force:package:create -n option-basic -t Unlocked -r force-app -e)
               id: create-package-name
               
              # Print Package Name
