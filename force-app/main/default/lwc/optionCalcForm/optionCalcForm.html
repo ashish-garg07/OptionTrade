@@ -1,0 +1,88 @@
+<template>
+  <div class="slds-p-bottom_x-large">
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col">
+        <lightning-input
+          type="number"
+          label="Strike"
+          name="Strike"
+          onchange={handleChange}
+        ></lightning-input>
+        <lightning-combobox
+          name="CallORPut"
+          label="Call/Put"
+          value={value}
+          placeholder="Select"
+          options={callorput}
+          onchange={handleChange}
+        ></lightning-combobox>
+      </div>
+      <div class="slds-col">
+        <lightning-input
+          type="number"
+          label="Premium Paid"
+          name="PP"
+          onchange={handleChange}
+        ></lightning-input>
+        <lightning-combobox
+          name="BuyORSell"
+          label="Buy/Sell"
+          value={value}
+          placeholder="Select"
+          options={buyorsell}
+          onchange={handleChange}
+        ></lightning-combobox>
+      </div>
+      <div class="slds-col">
+        <lightning-input
+          type="number"
+          label="Exp Start"
+          name="expStart"
+          onchange={handleChange}
+        ></lightning-input>
+        <lightning-input
+          type="number"
+          label="Exp End"
+          name="expEnd"
+          onchange={handleChange}
+        ></lightning-input>
+      </div>
+    </div>
+    <div class="slds-float_right slds-p-top_x-large">
+      <lightning-button
+        name="addOption"
+        label="Add"
+        class="slds-m-left_x-small"
+        onclick={handleAddOption}
+      ></lightning-button>
+      <template if:true={sizeOfArray}>
+        <lightning-button
+          name="calculate"
+          label="Calculate"
+          class="slds-m-left_x-small"
+          onclick={calculateOption}
+        ></lightning-button>
+      </template>
+    </div>
+  </div>
+  <div class="slds-p-top_x-large">
+    <template if:true={sizeOfArray}>
+      <lightning-datatable
+        key-field="id"
+        data={optionData}
+        columns={columns}
+        onrowaction={handleRowAction}
+      >
+      </lightning-datatable>
+    </template>
+  </div>
+
+  <div>
+    <lightning-datatable
+      key-field="id"
+      data={optionProfitLoss}
+      columns={columnsProfitLoss}
+    >
+    </lightning-datatable>
+  </div>
+</template>
