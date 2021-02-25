@@ -7,8 +7,6 @@ const columns = [
   { label: "Strike", fieldName: "Strike" },
   { label: "Call OR Put", fieldName: "CallORPut" },
   { label: "Buy OR Sell", fieldName: "BuyORSell" },
-  { label: "Expiry Start Range", fieldName: "expStart" },
-  { label: "Expiry End Range", fieldName: "expEnd" },
   { label: "Premium Paid", fieldName: "PP" },
   {
     type: "action",
@@ -30,8 +28,6 @@ export default class OptionCalcForm extends LightningElement {
   Strike;
   CallORPut;
   BuyORSell;
-  expStart;
-  expEnd;
   PP;
 
   get callorput() {
@@ -60,8 +56,6 @@ export default class OptionCalcForm extends LightningElement {
       Strike: this.Strike,
       CallORPut: this.CallORPut,
       BuyORSell: this.BuyORSell,
-      expStart: this.expStart,
-      expEnd: this.expEnd,
       PP: this.PP
     };
     this.optionData = [obj, ...this.optionData];
@@ -107,5 +101,10 @@ export default class OptionCalcForm extends LightningElement {
     calculateSrategyPayoff({ userData: this.optionData })
       .then((result) => (this.optionProfitLoss = result))
       .catch((error) => console.log(error));
+  }
+
+  clearOption() {
+    this.optionData = [];
+    this.optionProfitLoss = [];
   }
 }

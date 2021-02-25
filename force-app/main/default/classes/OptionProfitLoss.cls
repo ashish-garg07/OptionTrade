@@ -26,8 +26,14 @@ public without sharing class OptionProfitLoss {
         putMap.put('pp', String.ValueOf(optWrap.PP));
         putList.add(putMap);
       }
-      expStart = optWrap.expStart;
-      expEnd = optWrap.expEnd;
+      expStart = (expStart == 0 ||
+        optWrap.Strike - 500 < expStart)
+        ? optWrap.Strike - 500
+        : expStart;
+      expEnd = (expEnd == 0 ||
+        optWrap.Strike + 500 > expEnd)
+        ? optWrap.Strike + 500
+        : expEnd;
     }
 
     dataOption.put('Call', callList);
@@ -36,7 +42,7 @@ public without sharing class OptionProfitLoss {
     List<Map<String, Integer>> profitLossMapList = new List<Map<String, Integer>>();
     Map<String, Integer> profitLossMap = null;
 
-    for (Integer i = 0; i < (expEnd - expStart); i = i + 100) {
+    for (Integer i = 0; i <= (expEnd - expStart); i = i + 50) {
       Integer profitLoss = 0;
       for (String optionType : dataOption.keySet()) {
         for (Map<String, String> listOfMap : dataOption.get(optionType)) {
