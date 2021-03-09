@@ -65,21 +65,22 @@ jobs:
 
             # Create package version   
             - name: 'Create package version'
-              run: echo ':: set-output name=PACKAGE_VERSION::$(sfdx force:package:version:create --package ${{steps.create-package-name.outputs.PACKAGE_NAME}} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg | jq '.result.SubscriberPackageVersionId' | tr -d)'
+              run: echo '::set-output name=PACKAGE_VERSION::$(sfdx force:package:version:create --package ${{steps.create-package-name.outputs.PACKAGE_NAME}} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg | jq '.result.SubscriberPackageVersionId' | tr -d)'
 
 
             # Create scratch org
             - name: 'Create scratch org'
-             run: 'sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1'
+              run: 'sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1'
   
 
             # Install package in scratch org
             - name: 'Install package in scratch org'
-              run: 'sfdx force:package:install --package ${{steps.create-package-name.outputs.PACKAGE_VERSION}} --wait 10 --targetusername installorg'
+              run: 'sfdx force:package:install --package ${steps.create-package-name.outputs.PACKAGE_VERSION} --wait 10 --targetusername installorg'
 
             # Run unit tests in scratch org
             - name: 'Run unit tests in scratch org'
               run: 'sfdx force:apex:test:run --targetusername installorg --wait 10 --resultformat tap --codecoverage --testlevel $TESTLEVEL'
 
             # Delete scratch org
-            - run: 'sfdx force:org:delete --targetusername installorg --noprompt'
+            - name: 'Delete scratch org'
+              run: 'sfdx force:org:delete --targetusername installorg --noprompt'
