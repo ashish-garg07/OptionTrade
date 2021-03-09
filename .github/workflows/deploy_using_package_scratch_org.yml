@@ -65,7 +65,7 @@ jobs:
 
             # Create package version   
             - name: 'Create package version'
-              run: echo '::set-output name=PACKAGE_VERSION::$(sfdx force:package:version:create --package ${{steps.create-package-name.outputs.PACKAGE_NAME}} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg | jq '.result.SubscriberPackageVersionId' | tr -d)'
+              run: echo '::set-output name=PACKAGE_VERSION::$(sfdx force:package:version:create --package steps.create-package-name.outputs.PACKAGE_NAME --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg | jq '.result.SubscriberPackageVersionId' | tr -d)'
 
 
             # Create scratch org
