@@ -75,7 +75,7 @@ jobs:
 
             # Install package in scratch org
             - name: 'Install package in scratch org'
-              run: 'sfdx force:package:install --package ${steps.create-package-name.outputs.PACKAGE_VERSION} --wait 10 --targetusername installorg'
+              run: 'sfdx force:package:install --package ${{steps.create-package-name.outputs.PACKAGE_VERSION}} --wait 10 --targetusername installorg'
 
             # Run unit tests in scratch org
             - name: 'Run unit tests in scratch org'
